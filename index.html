@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat UI – Social Media</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #6366f1;
+      border-radius: 10px;
+    }
+
+    /* Glass */
+    .glass {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    /* Chat bubbles */
+    .chat-left {
+      border-radius: 14px 14px 14px 4px;
+    }
+    .chat-right {
+      border-radius: 14px 14px 4px 14px;
+    }
+
+    /* WhatsApp-style background */
+    .chat-bg {
+      background:
+        repeating-linear-gradient(
+          45deg,
+          #0f172a,
+          #0f172a 10px,
+          #111827 10px,
+          #111827 20px
+        );
+    }
+
+    /* Toggle logic */
+    .toggle-box {
+      display: none;
+    }
+
+    .toggle-box:checked + .menu {
+      display: block;
+    }
+
+    .menu {
+      display: none;
+    }
+
+    .status {
+      width: 10px;
+      height: 10px;
+      background: #22c55e;
+      border-radius: 50%;
+      border: 2px solid #0f172a;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-950 text-white h-screen overflow-hidden">
+
+<div class="flex h-full">
+
+  <!-- SIDEBAR -->
+  <aside class="hidden md:flex w-72 flex-col bg-slate-900 border-r border-slate-800">
+    <div class="p-4 text-xl font-bold text-indigo-400 border-b border-slate-800">
+      ChatSphere
+    </div>
+
+    <div class="p-3">
+      <input class="w-full px-3 py-2 rounded bg-slate-800" placeholder="Search..." />
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-2 space-y-2">
+
+      <div class="flex items-center gap-3 p-3 rounded hover:bg-slate-800 cursor-pointer">
+        <div class="relative">
+          <div class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center font-bold">A</div>
+          <span class="status"></span>
+        </div>
+        <div>
+          <h4 class="font-semibold">Arun</h4>
+          <p class="text-xs text-gray-400">Typing...</p>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- CHAT AREA -->
+  <main class="flex-1 flex flex-col">
+
+    <!-- HEADER -->
+    <div class="flex justify-between items-center p-4 bg-slate-900 border-b border-slate-800">
+
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center font-bold">
+          A
+        </div>
+        <div>
+          <h3 class="font-semibold">Arun</h3>
+          <p class="text-xs text-green-400">Online</p>
+        </div>
+      </div>
+
+      <!-- MENU TOGGLE -->
+      <div class="relative">
+        <label for="menuToggle" class="cursor-pointer text-2xl">⋮</label>
+        <input type="checkbox" id="menuToggle" class="toggle-box">
+
+        <div class="menu absolute right-0 mt-2 w-44 bg-slate-800 border border-slate-700 rounded shadow-lg">
+          <p class="px-4 py-2 hover:bg-slate-700 cursor-pointer">View Profile</p>
+          <p class="px-4 py-2 hover:bg-slate-700 cursor-pointer">Mute Chat</p>
+          <p class="px-4 py-2 hover:bg-slate-700 cursor-pointer">Clear Chat</p>
+          <p class="px-4 py-2 hover:bg-slate-700 cursor-pointer text-red-400">Block</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHAT BODY -->
+    <div class="flex-1 overflow-y-auto p-6 space-y-4 chat-bg">
+
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center font-bold">A</div>
+        <div class="glass px-4 py-2 max-w-xs chat-left">
+          Hi Karthi 👋 This UI looks clean!
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+        <div class="bg-indigo-600 px-4 py-2 max-w-xs chat-right">
+          Thank you 😄 I made it using only HTML & CSS.
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+        <div class="bg-indigo-600 px-4 py-2 max-w-xs chat-right">
+          Even menu & attachments use toggle trick!
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center font-bold">A</div>
+        <div class="glass px-4 py-2 max-w-xs chat-left">
+          That’s impressive 🔥 Perfect for your portfolio.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- INPUT AREA -->
+    <div class="p-4 bg-slate-900 border-t border-slate-800 flex items-center gap-3">
+
+      <!-- ATTACHMENT TOGGLE -->
+      <div class="relative">
+        <label for="attachToggle" class="cursor-pointer text-xl bg-slate-800 px-3 py-2 rounded">＋</label>
+        <input type="checkbox" id="attachToggle" class="toggle-box">
+
+        <div class="menu absolute bottom-14 left-0 w-44 bg-slate-800 border border-slate-700 rounded shadow-lg">
+          <p class="px-4 py-2 hover:bg-slate-700 cursor-pointer">📁 File</p>
+          <p class="px-4 py-2 hover:bg-slate-700 cursor-pointer">🖼 Image</p>
+          <p class="px-4 py-2 hover:bg-slate-700 cursor-pointer">📄 Document</p>
+          <p class="px-4 py-2 hover:bg-slate-700 cursor-pointer">📍 Location</p>
+        </div>
+      </div>
+
+      <input
+        type="text"
+        placeholder="Type a message..."
+        class="flex-1 px-4 py-3 rounded bg-slate-800"
+      />
+
+      <button class="bg-indigo-600 px-5 py-3 rounded hover:bg-indigo-700">
+        Send
+      </button>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>
